@@ -1,98 +1,1162 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missão Artemis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — A Humanidade Retorna à Lua</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #E8C547;
+    --gold-light: #F5DC7A;
+    --gold-dark: #B8962A;
+    --space-dark: #030712;
+    --space-mid: #0a0f1e;
+    --space-blue: #0d1b3e;
+    --accent-blue: #4A9EFF;
+    --text-light: #e8e8f0;
+    --text-muted: #8899bb;
+    --red-accent: #FF4E42;
+  }
 
-    <style>
-        body{
-            font-family: Arial, sans-serif;
-            background-color: #0b0f1a;
-            color: white;
-            margin: 0;
-            text-align: center;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        header{
-            background-color: #111827;
-            padding: 20px;
-        }
+  html { scroll-behavior: smooth; }
 
-        h1{
-            color: #00bfff;
-        }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--space-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+  }
 
-        .container{
-            width: 90%;
-            margin: auto;
-        }
+  /* STARS BACKGROUND */
+  .stars-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(13,27,62,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 10%, rgba(74,158,255,0.08) 0%, transparent 50%),
+      var(--space-dark);
+  }
 
-        .logo{
-            width: 220px;
-            margin-top: 20px;
-        }
+  .stars-bg::before {
+    content: '';
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 5%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 50% 15%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 30%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 8%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 45%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 25% 70%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 55%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 80%, #fff 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 60%, rgba(255,255,200,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 95%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 75%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 95% 40%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 12% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 40%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 10%, rgba(255,255,255,0.6) 0%, transparent 100%);
+    animation: twinkle 4s infinite alternate;
+  }
 
-        .texto{
-            font-size: 18px;
-            line-height: 1.6;
-            margin: 30px auto;
-            max-width: 900px;
-        }
+  @keyframes twinkle {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
 
-        .galeria{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-            gap: 15px;
-            margin-bottom: 40px;
-        }
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(3,7,18,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(232,197,71,0.15);
+  }
 
-        .galeria img{
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-decoration: none;
+  }
 
-        footer{
-            background-color: #111827;
-            padding: 15px;
-            margin-top: 20px;
-        }
-    </style>
+  .nav-logo span { color: var(--text-muted); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Orbitron', monospace;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-badge {
+    background: var(--gold);
+    color: var(--space-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+    padding: 0.4rem 1rem;
+    letter-spacing: 0.1em;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-bg-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJS59K9b-QpXbY6AMrQXDP5ZuMeBHAkfA6QA&s');
+    background-size: cover;
+    background-position: center 30%;
+    filter: brightness(0.3) saturate(0.8);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(3,7,18,0.2) 0%,
+      rgba(3,7,18,0.1) 40%,
+      rgba(3,7,18,0.7) 75%,
+      rgba(3,7,18,1) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 0 2rem;
+    animation: fadeUp 1.2s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-mission-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(232,197,71,0.1);
+    border: 1px solid rgba(232,197,71,0.3);
+    color: var(--gold);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    padding: 0.5rem 1.2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .hero-mission-tag::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3em;
+  }
+
+  .hero h1 .artemis {
+    display: block;
+    background: linear-gradient(135deg, #fff 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero h1 .two {
+    display: block;
+    font-size: clamp(5rem, 12vw, 10rem);
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(232,197,71,0.4);
+    letter-spacing: -0.05em;
+  }
+
+  .hero-subtitle {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--text-muted);
+    margin: 1.5rem 0 3rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  .hero-subtitle strong {
+    color: var(--text-light);
+    font-weight: 600;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--space-dark);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    border: 1px solid rgba(232,197,71,0.4);
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    background: rgba(232,197,71,0.05);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(232,197,71,0.15);
+    border-bottom: 1px solid rgba(232,197,71,0.15);
+    background: rgba(10,15,30,0.9);
+  }
+
+  .stat-item {
+    padding: 2rem;
+    text-align: center;
+    border-right: 1px solid rgba(232,197,71,0.1);
+    transition: background 0.3s;
+  }
+
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(232,197,71,0.04); }
+
+  .stat-number {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION SHARED */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* MISSION OBJECTIVE */
+  .mission-section {
+    padding: 8rem 4rem;
+    background: var(--space-mid);
+    overflow: hidden;
+  }
+
+  .mission-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .mission-text h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .mission-text h2 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .mission-text p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .mission-text p strong { color: var(--text-light); }
+
+  .mission-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem;
+    background: rgba(232,197,71,0.04);
+    border-left: 2px solid var(--gold);
+    border-right: none;
+  }
+
+  .highlight-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(232,197,71,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+
+  .highlight-item strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: var(--text-light);
+  }
+
+  .highlight-item span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ROCKET IMAGE SIDE */
+  .mission-visual {
+    position: relative;
+  }
+
+  .rocket-frame {
+    position: relative;
+    border: 1px solid rgba(232,197,71,0.2);
+    overflow: hidden;
+  }
+
+  .rocket-frame img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.1) saturate(0.9);
+  }
+
+  .rocket-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, var(--space-mid) 100%);
+  }
+
+  .rocket-label {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    z-index: 2;
+    background: rgba(3,7,18,0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(232,197,71,0.2);
+    padding: 1rem 1.2rem;
+  }
+
+  .rocket-label p {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .rocket-label small {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  /* CREW */
+  .crew-section {
+    padding: 8rem 4rem;
+    background: var(--space-dark);
+  }
+
+  .crew-header {
+    max-width: 1300px;
+    margin: 0 auto 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .crew-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+  }
+
+  .crew-header h2 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .crew-image-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(232,197,71,0.15);
+  }
+
+  .crew-full-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: contrast(1.05);
+  }
+
+  .crew-overlay-text {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(3,7,18,0.85) 0%,
+      rgba(3,7,18,0.4) 50%,
+      transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 4rem;
+  }
+
+  .crew-overlay-text h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .crew-names {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .crew-names li {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .crew-names li span {
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(232,197,71,0.1);
+    border: 1px solid rgba(232,197,71,0.25);
+    padding: 0.2rem 0.6rem;
+  }
+
+  /* LOGO SECTION */
+  .logo-section {
+    padding: 6rem 4rem;
+    background: var(--space-mid);
+    text-align: center;
+  }
+
+  .logo-section .logo-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .logo-showcase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    margin: 4rem auto;
+  }
+
+  .logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .logo-img-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(232,197,71,0.3);
+    position: relative;
+    background: rgba(13,27,62,0.5);
+  }
+
+  .logo-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .logo-img-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 30px rgba(232,197,71,0.1);
+  }
+
+  .logo-item p {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* TIMELINE */
+  .timeline-section {
+    padding: 8rem 4rem;
+    background: var(--space-dark);
+    overflow: hidden;
+  }
+
+  .timeline-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .timeline-inner h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 4rem;
+  }
+
+  .timeline-inner h2 em { font-style: normal; color: var(--gold); }
+
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(232,197,71,0.1));
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    animation: fadeRight 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+  .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes fadeRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .timeline-dot {
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--space-mid);
+    border: 1px solid var(--gold);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-body {
+    flex: 1;
+    padding-top: 0.5rem;
+  }
+
+  .timeline-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+  }
+
+  .timeline-body p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* BOTTOM HERO IMAGE */
+  .full-hero {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+  }
+
+  .full-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(0.5) contrast(1.1);
+  }
+
+  .full-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(3,7,18,0.6) 0%, rgba(3,7,18,0.2) 40%, rgba(3,7,18,0.7) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .full-hero-overlay h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, 4vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    max-width: 800px;
+  }
+
+  .full-hero-overlay h2 span { color: var(--gold); }
+
+  .full-hero-overlay p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    max-width: 550px;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    background: rgba(3,7,18,0.98);
+    border-top: 1px solid rgba(232,197,71,0.1);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  footer p {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .nasa-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 0.1em;
+  }
+
+  .nasa-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1300px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(232,197,71,0.3), transparent);
+  }
+
+  /* SCROLL INDICATOR */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .mission-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .crew-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .logo-showcase { flex-direction: column; gap: 3rem; }
+    .mission-section, .crew-section, .timeline-section { padding: 5rem 1.5rem; }
+    .crew-overlay-text { padding: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Missão Artemis</h1>
-    </header>
+<div class="stars-bg"></div>
 
-    <div class="container">
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ARTEMIS <span>PROGRAM</span></a>
+  <ul class="nav-links">
+    <li><a href="#mission">Missão</a></li>
+    <li><a href="#crew">Tripulação</a></li>
+    <li><a href="#timeline">Cronologia</a></li>
+  </ul>
+  <div class="nav-badge">MISSÃO ATIVA</div>
+</nav>
 
-        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Artemis_program_logo.svg/800px-Artemis_program_logo.svg.png">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-mission-tag">Programa Artemis — NASA</div>
+    <h1>
+      <span class="artemis">Artemis</span>
+      <span class="two">II</span>
+    </h1>
+    <p class="hero-subtitle">
+      O primeiro voo <strong>tripulado ao redor da Lua</strong> em mais de 50 anos.<br>
+      Quatro astronautas. Uma história que a humanidade jamais esquecerá.
+    </p>
+    <div class="hero-ctas">
+      <a href="#mission" class="btn-primary">Explorar Missão</a>
+      <a href="#crew" class="btn-outline">Conhecer a Tripulação</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Rolar</div>
+</section>
 
-        <div class="texto">
-            <p>
-                A Missão Artemis é um programa espacial liderado pela NASA que busca levar novamente astronautas à Lua.
-                O projeto também pretende desenvolver tecnologias para futuras missões tripuladas a Marte.
-            </p>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">4</div>
+    <div class="stat-label">Astronautas a bordo</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">~10</div>
+    <div class="stat-label">Dias de missão</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">384K</div>
+    <div class="stat-label">km da Terra à Lua</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">2025</div>
+    <div class="stat-label">Ano de lançamento</div>
+  </div>
+</div>
+
+<!-- MISSION OBJECTIVE -->
+<section class="mission-section" id="mission">
+  <div class="mission-grid">
+    <div class="mission-text">
+      <div class="section-label">Objetivo da missão</div>
+      <h2>Preparar o caminho para <em>pisar na Lua</em> novamente</h2>
+      <p>
+        A Artemis II é a <strong>segunda missão do programa Artemis da NASA</strong>, e o primeiro voo tripulado do foguete Space Launch System (SLS) combinado com a cápsula Orion. Diferente da Artemis I — que foi não tripulada — esta missão leva quatro astronautas em um arrojado sobrevoo da Lua.
+      </p>
+      <p>
+        O objetivo central é <strong>validar os sistemas de suporte de vida</strong> da Orion em ambiente espacial profundo real, testando cada subsistema crítico antes de uma futura missão de pouso lunar — a Artemis III.
+      </p>
+
+      <div class="mission-highlights">
+        <div class="highlight-item">
+          <div class="highlight-icon">🌑</div>
+          <div>
+            <strong>Voo circumlunar</strong>
+            <span>A tripulação realizará um sobrevoo próximo à Lua, chegando a aproximadamente 8.900 km da superfície lunar, sem pousar.</span>
+          </div>
         </div>
-
-        <h2>Galeria de Fotos</h2>
-
-        <div class="galeria">
-            <img src="https://images-assets.nasa.gov/image/KSC-20221116-PH-KLS01_0032/KSC-20221116-PH-KLS01_0032~large.jpg">
-            <img src="https://images-assets.nasa.gov/image/KSC-20221116-PH-KLS01_0050/KSC-20221116-PH-KLS01_0050~large.jpg">
-            <img src="https://images-assets.nasa.gov/image/KSC-20221116-PH-KLS01_0118/KSC-20221116-PH-KLS01_0118~large.jpg">
-            <img src="https://images-assets.nasa.gov/image/KSC-20221116-PH-KLS01_0172/KSC-20221116-PH-KLS01_0172~large.jpg">
-            <img src="https://images-assets.nasa.gov/image/Artemis-I-on-pad-at-sunrise/Artemis-I-on-pad-at-sunrise~large.jpg">
+        <div class="highlight-item">
+          <div class="highlight-icon">🚀</div>
+          <div>
+            <strong>Teste do SLS e Orion tripulados</strong>
+            <span>Primeira validação humana do foguete mais poderoso já construído pela NASA e da cápsula Orion em voo real.</span>
+          </div>
         </div>
-
+        <div class="highlight-item">
+          <div class="highlight-icon">🌍</div>
+          <div>
+            <strong>Missão histórica de diversidade</strong>
+            <span>Primeira mulher e primeiro não-americano a viajar ao espaço profundo na história da exploração humana.</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">🛡️</div>
+          <div>
+            <strong>Validação de sistemas de suporte de vida</strong>
+            <span>Todos os sistemas de suporte à vida da cápsula Orion serão testados com tripulantes reais em espaço profundo.</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <footer>
-        Projeto desenvolvido com Flask
-    </footer>
+    <div class="mission-visual">
+      <div class="rocket-frame">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxXXGDlw2ap5a7iuXbjPCKRjsAFhI1s-oIIQ&s" alt="Foguete SLS Artemis II">
+        <div class="rocket-label">
+          <p>Veículo de lançamento</p>
+          <small>Space Launch System (SLS) Block 1 Crew</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<div style="background: var(--space-mid);">
+  <div class="divider"></div>
+</div>
+
+<!-- LOGO SECTION -->
+<section class="logo-section">
+  <div class="logo-content">
+    <div class="section-label" style="justify-content: center;">Identidade visual</div>
+    <h2 style="font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; margin-bottom: 1rem;">
+      Símbolos de uma <em style="font-style: normal; color: var(--gold);">nova era</em> espacial
+    </h2>
+    <p style="color: var(--text-muted); line-height: 1.8;">
+      A missão Artemis II carrega consigo os símbolos de uma nova era de exploração — retornando à Lua com a ambição de alcançar Marte.
+    </p>
+  </div>
+
+  <div class="logo-showcase">
+    <div class="logo-item">
+      <div class="logo-img-frame">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBypTN_G95sXsOWJRcgL33pwQCgZJFWaDREQ&s alt="Logo Artemis II">
+      </div>
+      <p>Logo da Missão</p>
+    </div>
+    <div class="logo-item">
+      <div class="logo-img-frame">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScDIc11qLhKu12O6JSo2zHET4b7Tva6nm6ow&s" alt="Logo com Lua">
+      </div>
+      <p>Logo com Lua</p>
+    </div>
+  </div>
+
+  <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 600px; margin: 0 auto; line-height: 1.7;">
+    O emblema da missão incorpora a deusa grega Artemis — irmã de Apolo — simbolizando o retorno da humanidade à Lua com uma nova geração de exploradores.
+  </p>
+</section>
+
+<!-- CREW SECTION -->
+<section class="crew-section" id="crew">
+  <div class="crew-header">
+    <div>
+      <div class="section-label">Os escolhidos</div>
+      <h2>A <em>tripulação</em> histórica</h2>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 350px; text-align: right; line-height: 1.6;">
+      Quatro astronautas que carreram consigo a esperança e o futuro de toda a humanidade ao redor da Lua.
+    </p>
+  </div>
+
+  <div class="crew-image-container">
+    <img class="crew-full-img" src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/artemis3.jpg?w=849&h=477&crop=0" alt="Equipe Artemis II">
+    <div class="crew-overlay-text">
+      <h3>Tripulação Artemis II</h3>
+      <ul class="crew-names">
+        <li>Reid Wiseman <span>Comandante</span></li>
+        <li>Victor Glover <span>Piloto</span></li>
+        <li>Christina Koch <span>Especialista</span></li>
+        <li>Jeremy Hansen <span>Especialista</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="max-width: 1300px; margin: 3rem auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+    <div style="background: rgba(10,15,30,0.8); border: 1px solid rgba(232,197,71,0.1); padding: 1.5rem; text-align: center;">
+      <div style="font-family: 'Orbitron', monospace; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;">Comandante</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: white;">Reid Wiseman</div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">NASA / USN</div>
+    </div>
+    <div style="background: rgba(10,15,30,0.8); border: 1px solid rgba(232,197,71,0.1); padding: 1.5rem; text-align: center;">
+      <div style="font-family: 'Orbitron', monospace; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;">Piloto</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: white;">Victor Glover</div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">NASA / USN</div>
+    </div>
+    <div style="background: rgba(10,15,30,0.8); border: 1px solid rgba(232,197,71,0.1); padding: 1.5rem; text-align: center;">
+      <div style="font-family: 'Orbitron', monospace; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;">Especialista de missão</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: white;">Christina Koch</div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">NASA — Primeira mulher</div>
+    </div>
+    <div style="background: rgba(10,15,30,0.8); border: 1px solid rgba(232,197,71,0.1); padding: 1.5rem; text-align: center;">
+      <div style="font-family: 'Orbitron', monospace; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;">Especialista de missão</div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: white;">Jeremy Hansen</div>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">CSA — Primeiro não-americano</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section" id="timeline">
+  <div class="timeline-inner">
+    <div class="section-label">Cronologia da missão</div>
+    <h2>Da decolagem ao <em>retorno</em></h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">D+0</div>
+        <div class="timeline-body">
+          <h3>Lançamento — Kennedy Space Center</h3>
+          <p>O Space Launch System decola do Complexo de Lançamento 39B, no Kennedy Space Center, Flórida. Geração de 8,8 milhões de libras de empuxo — o foguete mais poderoso operacional no mundo.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">D+1</div>
+        <div class="timeline-body">
+          <h3>Inserção na órbita terrestre e verificação</h3>
+          <p>A cápsula Orion completa múltiplas órbitas ao redor da Terra enquanto a tripulação realiza verificações sistemáticas de todos os sistemas de suporte de vida e propulsão.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">D+4</div>
+        <div class="timeline-body">
+          <h3>Sobrevoo lunar — a 8.900 km da Lua</h3>
+          <p>A Orion passa pela face oculta da Lua, levando a tripulação ao ponto mais distante da Terra que humanos já estiveram. Uma vista que apenas 24 pessoas viram antes — e 50 anos atrás pela última vez.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">D+7</div>
+        <div class="timeline-body">
+          <h3>Trajetória de retorno</h3>
+          <p>Após completar o sobrevoo, a Orion inicia a jornada de retorno à Terra. A tripulação documenta dados científicos coletados durante toda a missão em espaço profundo.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">D+10</div>
+        <div class="timeline-body">
+          <h3>Amerissagem no Oceano Pacífico</h3>
+          <p>A cápsula Orion reentrou na atmosfera terrestre a 40.000 km/h, com proteção do escudo térmico, e amerissou com sucesso no Oceano Pacífico — encerrando a missão mais audaciosa do século.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL HERO IMAGE -->
+<section class="full-hero">
+  <img src="data:image/jpeg;base64,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" alt="Equipe completa Artemis II">
+  <div class="full-hero-overlay">
+    <h2>A <span>humanidade</span> volta a olhar para a Lua — e desta vez, para ficar</h2>
+    <p>Artemis II é o primeiro passo de uma jornada que nos levará de volta à Lua, e depois a Marte.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ARTEMIS II</div>
+  <p>© 2025 NASA / Programa Artemis. Site informativo sobre a missão.</p>
+  <div class="nasa-badge">
+    <div class="nasa-dot"></div>
+    NASA — Exploração Humana
+  </div>
+</footer>
+
+<script>
+  // Smooth animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.highlight-item, .timeline-item, .stat-item').forEach(el => {
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+
+  // Parallax on hero bg
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const heroBg = document.querySelector('.hero-bg-img');
+    if (heroBg && scrolled < window.innerHeight) {
+      heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+  });
+</script>
 </body>
 </html>
